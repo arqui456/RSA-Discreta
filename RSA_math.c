@@ -3,13 +3,14 @@
 #include "math.h"
 #include "RSA_math.h"
 
-int prime_list[1000];
+unsigned long long int prime_list[1000];
 
 //Função pra criar um vetor com os 1000 primeiros primos maiores que 500.
 
 void prime_gen ()
 {
-    int primo = 0, achou = 0, j = 0 , u, i, size, primos = 0;
+    int achou = 0, j = 0 , u, i, size, primos = 0;
+    unsigned long long int primo = 0;
 
 	for(i=500 ;primos < 1500 ;i++)
     {
@@ -30,4 +31,17 @@ void prime_gen ()
                 primos++;
             }
 	}
+}
+
+
+int al_euclides (int a, int b)
+{
+    if (b == 0)
+    {
+        return a;
+    }
+    else
+    {
+        al_euclides (b, a%b);
+    }
 }

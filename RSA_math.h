@@ -3,5 +3,6 @@
 
 //Funções aqui
 void prime_gen ();
+int al_euclides ();
 
 #endif
