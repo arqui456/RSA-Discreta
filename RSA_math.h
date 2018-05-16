@@ -5,4 +5,6 @@
 
 int al_euclides (int a, int b);
 
+int its_prime (int x);
+
 #endif
