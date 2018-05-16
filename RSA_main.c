@@ -97,10 +97,27 @@ int main()
                             break;
                         }
                     }
+                    n = p * q;
+                    phi = (p-1)*(q-1);
+                    while (1)
+                    {
+                        printf ("Digite um número E coprimo a PHI.\n");
+                        scanf ("%llu", &e);
+                        if (al_euclides (MA(e, phi), MN(e, phi)) == 1)
+                            {
+                                break;
+                            }
+                    }
+                    FILE *f = fopen("chave publica.txt", "w");
+                    if (f == NULL)
+                        {
+                            printf("Error opening file!\n");
+                            exit(1);
+                        }
 
+                    fprintf (f, "n = %llu\n e = %llu\n", n, e);
+                    fclose(f);
 
-
-                    //fprintf (f, "p = %d\n, q = %d\n, e = %llu\n", p, q, e);
                 }
             else
                 {
