@@ -6,24 +6,41 @@
 #define MA(x, y) (x > y) ? (x) : (y)
 #define MN(x, y) (x < y) ? (x) : (y)
 
-unsigned long long int prime_list[1000];
+int prime_list[1000];
+
+void prime_gen ()
+{
+    int achou = 0, j = 0 , u, i, size, primos = 0;
+    int primo = 0;
+
+    for(i=500 ;primos < 1500 ;i++)
+    {
+        primo = i;
+        for(u=2;u<=sqrt(primo);u++)
+            {
+                achou = 0;
+                if(primo%u==0)
+                {
+                    achou = 1;
+                    break;
+                }
+            }
+            if(!achou)
+            {
+                prime_list[j] = primo;
+                ++j;
+                primos++;
+            }
+    }
+}
 
 int main() 
 {
 
-    //Criação do ponteiro pra gerar o arquivo com as chaves.
-
-    FILE *f = fopen("chave publica.txt", "w");
-    if (f == NULL)
-        {
-            printf("Error opening file!\n");
-            exit(1);
-        }
-
     // Declaração de  variáveis.
 
-    int opcao, case_1, indice_p, indice_q;
-    unsigned long long int p, q, phi, e, n;
+    int opcao, case_1, indice_p, indice_q, p, q;
+    unsigned long long int phi, e, n;
     
     //Geração do menu.
 
@@ -56,13 +73,34 @@ int main()
                                     break;
                                 }
                         }
-                    fprintf (f, "n = %llu\n e = %llu\n", n, e);           
+
+                    //Criação do ponteiro pra gerar o arquivo com as chaves.
+
+                    FILE *f = fopen("chave publica.txt", "w");
+                    if (f == NULL)
+                        {
+                            printf("Error opening file!\n");
+                            exit(1);
+                        }
+
+                    fprintf (f, "n = %llu\n e = %llu\n", n, e);
+                    fclose(f); 
                 }
             else if (case_1 == 2)
                 {
-                    printf ("Digite dois números primos P e Q distintos, e um expoente E.\n");
-                    scanf ("%llu%llu%llu", &p, &q, &e);
-                    fprintf (f, "p = %llu\n, q = %llu\n, e = %llu\n", p, q, e);
+                    while (1)
+                    {
+                        printf ("Digite dois números primos P e Q distintos.\n");
+                        scanf ("%d%d", &p, &q);  
+                        if (p != q)
+                        {
+                            break;
+                        }
+                    }
+
+
+
+                    //fprintf (f, "p = %d\n, q = %d\n, e = %llu\n", p, q, e);
                 }
             else
                 {

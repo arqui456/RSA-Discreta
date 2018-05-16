@@ -2,7 +2,7 @@
 #define RSA_MATH_H_
 
 //Funções aqui
-void prime_gen ();
-int al_euclides ();
+
+int al_euclides (int a, int b);
 
 #endif
