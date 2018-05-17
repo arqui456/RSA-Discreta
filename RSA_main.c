@@ -7,7 +7,7 @@
 #define MA(x, y) (x > y) ? (x) : (y)
 #define MN(x, y) (x < y) ? (x) : (y)
 
-int TAM 100
+#define TAM 100
 int prime_list[1000];
 
 //Função que gera a lista dos mil primeiros primos maiores que 500.
@@ -45,7 +45,7 @@ int main()
     int opcao, case_1, indice_p, indice_q, p, q, ascii_mensagem[TAM], i;
     unsigned long long int phi, e, n;
     char mensagem[TAM];
-
+    char input[10];
     //Geração do menu.
 
     while(1)
@@ -55,7 +55,12 @@ int main()
         printf("3 - Desencriptar.\n");
         printf("4 - Sair\n");
 
-        scanf("%d", &opcao);
+        scanf("%s", input);
+        while(input[0] < '1' || input[0] > '4'){
+            printf("\nescreva certo caba de peia: ");
+            scanf("%s", input);
+        }
+        opcao = atoi(input);
 
         if(opcao == 1)
         {
@@ -95,7 +100,6 @@ int main()
                     fprintf (f, "n = %llu\n e = %llu\n", n, e);
                     fclose(f);
                 }
-
                 //Opção manual.
 
             else if (case_1 == 2)//encriptar
@@ -119,7 +123,6 @@ int main()
                         {
                           printf("P e Q precisam ser diferentes!!\n");
                         }
-
                     }
                     n = p * q;
                     phi = (p-1)*(q-1);
@@ -150,7 +153,7 @@ int main()
                 }
         }
         else if(opcao == 2)
-            {
+            {/*
               //Lendo a mensagem
                 printf ("Digite uma mensagem a ser encriptada.\n");
                 fgets (mensagem, TAM, stdin);
@@ -162,27 +165,16 @@ int main()
 
               //Lendo a chave pública
 
-
+*/
             }
-
         else if(opcao == 3)
             {
                 //desencriptar
             }
-
         else if(opcao == 4)
             {
                 break;
             }
-
-        else
-            {
-                //Tratamento de erro.
-                printf ("Digite uma opção válida!\n");
-                printf("Digite novamente: \n");
-                scanf("%d", &opcao);
-            }
-
         }
 	return 0;
 }
