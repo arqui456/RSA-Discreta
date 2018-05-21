@@ -72,6 +72,7 @@ int main()
                 printf("Escolha uma opção válida: ");
                 scanf("%s", input2);
             }
+
             case_1 = atoi(input2);
 
             //Opção automatica.
@@ -170,13 +171,13 @@ int main()
 
                 for (int i = 0; i < strlen(mensagem); ++i)
                 {
-                    ascii_mensagem[i] = atoi(mensagem[i]);
+                    ascii_mensagem[i] = mensagem[i];
                 }
 
-                for (int i = 0; i < strlen(ascii_mensagem); ++i)
+                for (int i = 0; i < strlen(mensagem); ++i)
                 {
                     encri_mens[i] = modular_expo(ascii_mensagem[i], e, n);
-                    fprintf (f2, "%llu", encri_mens[i]);
+                    fprintf (f2, " %llu", encri_mens[i]);
                 }
 
                 fclose(f2);
