@@ -57,7 +57,7 @@ int main()
 
         scanf("%s", input1);
         while(input1[0] < '1' || input1[0] > '4'){
-            printf("\nescreva certo caba de peia: ");
+            printf("Escolha uma opção válida:  ");
             scanf("%s", input1);
         }
         opcao = atoi(input1);
@@ -66,10 +66,10 @@ int main()
         {
             printf ("1 - Gerar P, Q e E.\n");
             printf ("2 - Inserir P, Q e E manualmente.\n");
-            
+
             scanf("%s", input2);
             while(input2[0] < '1' || input2[0] > '2'){
-                printf("\nescreva certo caba de peia: ");
+                printf("Escolha uma opção válida: ");
                 scanf("%s", input2);
             }
             case_1 = atoi(input2);
@@ -151,12 +151,12 @@ int main()
                     fprintf (f, "n = %llu\n e = %llu\n", n, e);
                     fclose(f);
 
-                }   
+                }
         }
         else if(opcao == 2)
             {
                 FILE *f2 = fopen("mensagem encriptada.txt", "w");
-                    if (f == NULL)
+                    if (f2 == NULL)
                         {
                             printf("Error opening file!\n");
                             exit(1);
@@ -176,10 +176,10 @@ int main()
                 for (int i = 0; i < strlen(ascii_mensagem); ++i)
                 {
                     encri_mens[i] = modular_expo(ascii_mensagem[i], e, n);
-                    fprintf (f2, " ", encri_mens[i]);
+                    fprintf (f2, "%llu", encri_mens[i]);
                 }
-                
-                fclose(f);
+
+                fclose(f2);
             }
         else if(opcao == 3)
             {
