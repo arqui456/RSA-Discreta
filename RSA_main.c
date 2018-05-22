@@ -97,19 +97,33 @@ int main()
 
                     //Abrir arquivo para salvar a chave pública.
 
-                    FILE *f = fopen("chave publica.txt", "w");
-                    if (f == NULL)
+                    FILE *publica = fopen("chave publica.txt", "w");
+                    if (publica == NULL)
                         {
                             printf("Error opening file!\n");
                             exit(1);
                         }
 
-                    fprintf (f, "n = %llu\n e = %llu\n", n, e);
-                    fclose(f);
+                    fprintf (publica, "n = %llu\n e = %llu\n", n, e);
+                    fclose(publica);
+
+                    //Abrir arquivo e salvar chave privada (P, Q e E)
+
+                FILE *privada = fopen("chave privada.txt", "w");
+                    if (privada == NULL)
+                        {
+                            printf("Error opening file!\n");
+                            exit(1);
+                        }
+
+                    fprintf (privada, "p = %d\n q = %d\n e = %llu\n", p, q, e);
+                    fclose(privada);
                 }
+               
+               
                 //Opção manual.
 
-            else if (case_1 == 2)//encriptar
+            else if (case_1 == 2)
                 {
                     printf ("Digite dois números primos P e Q distintos.\n");
                     while (1)
@@ -142,16 +156,25 @@ int main()
                                 break;
                             }
                     }
-                    FILE *f = fopen("chave publica.txt", "w");
-                    if (f == NULL)
+                    FILE *publica = fopen("chave publica.txt", "w");
+                    if (publica == NULL)
                         {
                             printf("Error opening file!\n");
                             exit(1);
                         }
 
-                    fprintf (f, "n = %llu\n e = %llu\n", n, e);
-                    fclose(f);
+                    fprintf (publica, "n = %llu\n e = %llu\n", n, e);
+                    fclose(publica);
 
+                    FILE *privada = fopen("chave privada.txt", "w");
+                    if (privada == NULL)
+                        {
+                            printf("Error opening file!\n");
+                            exit(1);
+                        }
+
+                    fprintf (privada, "p = %d\n q = %d\n e = %llu\n", p, q, e);
+                    fclose(privada);
                 }
         }
         else if(opcao == 2)
@@ -184,7 +207,7 @@ int main()
             }
         else if(opcao == 3)
             {
-                //desencriptar
+                printf ("Digite P");
             }
         else if(opcao == 4)
             {
