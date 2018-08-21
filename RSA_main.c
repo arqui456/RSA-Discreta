@@ -6,8 +6,8 @@
 
 #define MA(x, y) (x > y) ? (x) : (y)
 #define MN(x, y) (x < y) ? (x) : (y)
-
 #define TAM 100
+
 int prime_list[1000];
 
 //Função que gera a lista dos mil primeiros primos maiores que 500.
@@ -43,9 +43,9 @@ int main()
     // Declaração de  variáveis.
 
     int opcao, case_1, indice_p, indice_q, p, q, ascii_mensagem[TAM], i;
-    unsigned long long int phi, e, n;
+    unsigned long long int phi, e, n, encri_mens[TAM];
     char mensagem[TAM];
-    char input[10];
+    char input1[10], input2[10];
     //Geração do menu.
 
     while(1)
@@ -55,18 +55,25 @@ int main()
         printf("3 - Desencriptar.\n");
         printf("4 - Sair\n");
 
-        scanf("%s", input);
-        while(input[0] < '1' || input[0] > '4'){
-            printf("\nescreva certo caba de peia: ");
-            scanf("%s", input);
+        scanf("%s", input1);
+        while(input1[0] < '1' || input1[0] > '4'){
+            printf("Escolha uma opção válida:  ");
+            scanf("%s", input1);
         }
-        opcao = atoi(input);
+        opcao = atoi(input1);
 
         if(opcao == 1)
         {
             printf ("1 - Gerar P, Q e E.\n");
             printf ("2 - Inserir P, Q e E manualmente.\n");
-            scanf ("%d", &case_1);
+
+            scanf("%s", input2);
+            while(input2[0] < '1' || input2[0] > '2'){
+                printf("Escolha uma opção válida: ");
+                scanf("%s", input2);
+            }
+
+            case_1 = atoi(input2);
 
             //Opção automatica.
 
@@ -90,19 +97,33 @@ int main()
 
                     //Abrir arquivo para salvar a chave pública.
 
-                    FILE *f = fopen("chave publica.txt", "w");
-                    if (f == NULL)
+                    FILE *publica = fopen("chave publica.txt", "w");
+                    if (publica == NULL)
                         {
                             printf("Error opening file!\n");
                             exit(1);
                         }
 
-                    fprintf (f, "n = %llu\n e = %llu\n", n, e);
-                    fclose(f);
+                    fprintf (publica, "n = %llu\n e = %llu\n", n, e);
+                    fclose(publica);
+
+                    //Abrir arquivo e salvar chave privada (P, Q e E)
+
+                FILE *privada = fopen("chave privada.txt", "w");
+                    if (privada == NULL)
+                        {
+                            printf("Error opening file!\n");
+                            exit(1);
+                        }
+
+                    fprintf (privada, "p = %d\n q = %d\n e = %llu\n", p, q, e);
+                    fclose(privada);
                 }
+               
+               
                 //Opção manual.
 
-            else if (case_1 == 2)//encriptar
+            else if (case_1 == 2)
                 {
                     printf ("Digite dois números primos P e Q distintos.\n");
                     while (1)
@@ -135,41 +156,58 @@ int main()
                                 break;
                             }
                     }
-                    FILE *f = fopen("chave publica.txt", "w");
-                    if (f == NULL)
+                    FILE *publica = fopen("chave publica.txt", "w");
+                    if (publica == NULL)
                         {
                             printf("Error opening file!\n");
                             exit(1);
                         }
 
-                    fprintf (f, "n = %llu\n e = %llu\n", n, e);
-                    fclose(f);
+                    fprintf (publica, "n = %llu\n e = %llu\n", n, e);
+                    fclose(publica);
 
-                }
-            else
-                {
-                    //Tratamento de erro.
-                    printf ("Digite uma opção válida!\n");
+                    FILE *privada = fopen("chave privada.txt", "w");
+                    if (privada == NULL)
+                        {
+                            printf("Error opening file!\n");
+                            exit(1);
+                        }
+
+                    fprintf (privada, "p = %d\n q = %d\n e = %llu\n", p, q, e);
+                    fclose(privada);
                 }
         }
         else if(opcao == 2)
-            {/*
-              //Lendo a mensagem
-                printf ("Digite uma mensagem a ser encriptada.\n");
-                fgets (mensagem, TAM, stdin);
+            {
+                FILE *f2 = fopen("mensagem encriptada.txt", "w");
+                    if (f2 == NULL)
+                        {
+                            printf("Error opening file!\n");
+                            exit(1);
+                        }
 
-                for (i = 0; i < strlen(mensagem); ++i)
+                printf("Insira a chave publica composta por N e E:");
+                scanf("%llu%llu", &n, &e);
+
+                printf("Insira a mensagem a ser encriptada:");
+                scanf("%s", mensagem);
+
+                for (int i = 0; i < strlen(mensagem); ++i)
                 {
-                  // passar para ascii
+                    ascii_mensagem[i] = mensagem[i];
                 }
 
-              //Lendo a chave pública
+                for (int i = 0; i < strlen(mensagem); ++i)
+                {
+                    encri_mens[i] = modular_expo(ascii_mensagem[i], e, n);
+                    fprintf (f2, " %llu", encri_mens[i]);
+                }
 
-*/
+                fclose(f2);
             }
         else if(opcao == 3)
             {
-                //desencriptar
+                printf ("Digite P");
             }
         else if(opcao == 4)
             {
